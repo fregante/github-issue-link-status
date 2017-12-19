@@ -1,4 +1,4 @@
-# GitHub Issue Link Status [![Chrome version][badge-cws]][link-cws] [![deployment][badge-travis]][link-travis]
+# GitHub Issue Link Status [![Chrome version][badge-cws]][link-cws] [![Firefox version][badge-amo]][link-amo] [![deployment][badge-travis]][link-travis]
 
   [badge-cws]: https://img.shields.io/chrome-web-store/v/nbiddhncecgemgccalnoanpnenalmkic.svg?label=chrome
   [badge-amo]: https://img.shields.io/amo/v/github-issue-link-status.svg?label=firefox
@@ -14,7 +14,7 @@ GitHub Enterprise is also supported. More info in the options.
 ## Installation <img src="screenshot.png" align="right" width="640" height="400">
 
   + [**Chrome** extension](https://chrome.google.com/webstore/detail/github-issue-link-status/nbiddhncecgemgccalnoanpnenalmkic)
-  + Firefox - Use [this Firefox add-on](https://addons.mozilla.org/en-US/firefox/addon/chrome-store-foxified/) to install the Chrome version.
+  + [**Firefox** add-on](https://addons.mozilla.org/en-US/firefox/addon/github-issue-link-status/)
   + Opera - Use [this Opera extension](https://addons.opera.com/en/extensions/details/download-chrome-extension-9/) to install the Chrome version.
 
 
