@@ -63,13 +63,13 @@ async function apply() {
 		return;
 	}
 
-	const gcl = buildGQL(links);
+	const query = buildGQL(links);
 	const response = await fetch(endpoint, {
 		method: 'POST',
 		headers: new Headers({
 			Authorization: `bearer ${token}`
 		}),
-		body: `{"query": ${JSON.stringify(gcl)}}`
+		body: JSON.stringify({query})
 	});
 	const {data} = await response.json();
 
