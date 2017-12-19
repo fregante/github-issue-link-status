@@ -45,7 +45,7 @@ function getNewLinks() {
 	const newLinks = new Map();
 	const containers = select.all(`
 		.js-issue-title,
-		.timeline-comment-wrapper
+		.markdown-body
 	`);
 	const links = select.all(`
 		a[href*="/pull/"]:not(.ILS),
