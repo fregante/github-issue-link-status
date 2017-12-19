@@ -1,0 +1,15 @@
+:root {
+	--github-green: #28a745;
+	--github-purple: #6f42c1;
+	--github-red: #cb2431;
+}
+
+.ILS--open {
+	color: var(--github-green);
+}
+.ILS--closed {
+	color: var(--github-red);
+}
+.ILS--merged {
+	color: var(--github-purple);
+}
