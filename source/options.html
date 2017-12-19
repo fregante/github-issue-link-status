@@ -2,6 +2,11 @@
 <meta charset="utf-8">
 <title>ILS options</title>
 <style>
+	:root {
+		--github-green: #28a745;
+		--github-purple: #6f42c1;
+		--github-red: #cb2431;
+	}
 	body {
 		width: 350px;
 		margin: 14px 17px; /* Chrome default, match for Firefox */
@@ -15,12 +20,23 @@
 	textarea {
 		width: 100%;
 	}
+
+	input:valid {
+		color: var(--github-green);
+		border: 1px solid;
+	}
+
+	input:invalid {
+		color: var(--github-red);
+		border: 1px solid;
+	}
+
 </style>
 <form id="options-form">
 	<h2>Enter a GitHub API personal token</h2>
 	<p>The token is required to make a GitHub v4 API call. <a href="https://github.com/settings/tokens/new?scopes=repo&description=GitHub%20Issue%20Link%20Status" target="_blank">Generate one</a> and add it here. This will only be stored locally.</p>
 	<p>
-		<input name="token" size=50>
+		<input name="token" size="50" maxlength="40" pattern="[0-9a-f]{40}" required>
 	</p>
 	<h2>GitHub Enterprise</h2>
 	<p>
