@@ -3,8 +3,8 @@
     "test": "xo && npm run build",
     "build": "webpack",
     "watch": "webpack --watch",
-    "release-amo": "cd extension && webext submit",
-    "release-cws": "cd extension && webstore upload --auto-publish",
+    "release-amo": "cd distribution && webext submit",
+    "release-cws": "cd distribution && webstore upload --auto-publish",
     "release": "npm run build && npm run update-version && npm run release-cws",
     "update-version": "VERSION=$(date -u +%y.%-m.%-d.%-H%M); echo $VERSION; dot-json distribution/manifest.json version $VERSION"
 
