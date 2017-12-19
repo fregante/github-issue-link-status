@@ -2,7 +2,7 @@ import 'webext-dynamic-content-scripts';
 import select from 'select-dom';
 import OptionsSync from 'webext-options-sync';
 
-const endpoint = 'https://api.github.com/graphql';
+const endpoint = location.hostname === 'github.com' ? 'https://api.github.com/graphql' : `${location.origin}/api/graphql`;
 const issueUrlRegex = /^[/](.+[/][^/]+)[/](issues|pull)[/](\d+)([/]|$)/;
 
 let token;
