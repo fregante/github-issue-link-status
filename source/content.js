@@ -1,11 +1,16 @@
 import 'webext-dynamic-content-scripts';
 import select from 'select-dom';
 import OptionsSync from 'webext-options-sync';
-
-const endpoint = location.hostname === 'github.com' ? 'https://api.github.com/graphql' : `${location.origin}/api/graphql`;
-const issueUrlRegex = /^[/](.+[/][^/]+)[/](issues|pull)[/](\d+)([/]|$)/;
+import * as icons from './icons';
 
 let token;
+const endpoint = location.hostname === 'github.com' ? 'https://api.github.com/graphql' : `${location.origin}/api/graphql`;
+const issueUrlRegex = /^[/](.+[/][^/]+)[/](issues|pull)[/](\d+)([/]|$)/;
+const stateColorMap = {
+	open: 'text-green',
+	closed: 'text-red',
+	merged: 'text-purple'
+};
 
 function escapeForGql(repo) {
 	return repo.replace(/[/-]/g, '_');
@@ -43,11 +48,11 @@ function getNewLinks() {
 		.timeline-comment-wrapper
 	`);
 	const links = select.all(`
-		a[href*="/pull/"]:not(.webext-link-status),
-		a[href*="/issues/"]:not(.webext-link-status)
+		a[href*="/pull/"]:not(.ILS),
+		a[href*="/issues/"]:not(.ILS)
 	`, containers);
 	for (const link of links) {
-		link.classList.add('webext-link-status');
+		link.classList.add('ILS');
 		let [, repo, type, id] = link.pathname.match(issueUrlRegex) || [];
 		if (id) {
 			type = type.replace('issues', 'issue').replace('pull', 'pullRequest');
@@ -63,6 +68,10 @@ async function apply() {
 		return;
 	}
 
+	for (const [link, {type}] of links) {
+		link.insertAdjacentHTML('beforeEnd', ' ' + icons['open' + type]);
+	}
+
 	const query = buildGQL(links);
 	const response = await fetch(endpoint, {
 		method: 'POST',
@@ -75,8 +84,10 @@ async function apply() {
 
 	for (const [link, {repo, type, id}] of links) {
 		const state = data['repo' + escapeForGql(repo)]['id' + id].state.toLowerCase();
-		link.classList.add('ILS--' + state);
-		link.classList.add('ILS--' + type);
+		link.classList.add(stateColorMap[state]);
+		if (state !== 'open' && state + type !== 'closedpullRequest') {
+			link.querySelector('svg').outerHTML = icons[state + type];
+		}
 	}
 }
 
