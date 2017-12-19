@@ -69,7 +69,7 @@ async function apply() {
 	}
 
 	for (const [link, {type}] of links) {
-		link.insertAdjacentHTML('beforeEnd', ' ' + icons['open' + type]);
+		link.insertAdjacentHTML('beforeEnd', icons['open' + type]);
 	}
 
 	const query = buildGQL(links);
