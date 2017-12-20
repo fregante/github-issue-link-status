@@ -98,12 +98,24 @@ async function apply() {
 	}
 }
 
+function onAjaxedPages(cb) {
+	cb();
+	document.addEventListener('pjax:end', cb);
+}
+
+function onNewComments(cb) {
+	cb();
+	const commentList = select('.js-discussion');
+	if (commentList) {
+		new MutationObserver(cb).observe(commentList, {childList: true});
+	}
+}
+
 async function init() {
 	const options = await new OptionsSync().getAll();
 	token = options.token;
 	if (token) {
-		document.addEventListener('pjax:end', apply);
-		apply();
+		onAjaxedPages(() => onNewComments(apply));
 	} else {
 		console.error('GitHub Issue Link Status: you will need to set a token in the options for this extension to work.');
 	}
