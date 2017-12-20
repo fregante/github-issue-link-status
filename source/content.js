@@ -12,6 +12,11 @@ const stateColorMap = {
 	merged: 'text-purple'
 };
 
+function anySelector(selector) {
+	const prefix = document.head.style.MozOrient === '' ? 'moz' : 'webkit';
+	return selector.replace(/:any\(/g, `:-${prefix}-any(`);
+}
+
 function escapeForGql(repo) {
 	return repo.replace(/[/-]/g, '_');
 }
@@ -43,14 +48,16 @@ function buildGQL(links) {
 
 function getNewLinks() {
 	const newLinks = new Set();
-	const containers = select.all(`
-		.js-issue-title,
-		.markdown-body
-	`);
-	const links = select.all(`
-		a[href*="/pull/"]:not(.ILS),
-		a[href*="/issues/"]:not(.ILS)
-	`, containers);
+	const links = select.all(anySelector(`
+		:any(
+			.js-issue-title,
+			.markdown-body
+		)
+		:any(
+			a[href*="/pull/"],
+			a[href*="/issues/"]
+		):not(.ILS)
+	`));
 	for (const link of links) {
 		link.classList.add('ILS');
 		let [, repo, type, id] = link.pathname.match(issueUrlRegex) || [];
