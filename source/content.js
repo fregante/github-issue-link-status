@@ -107,7 +107,11 @@ function onNewComments(cb) {
 	cb();
 	const commentList = select('.js-discussion');
 	if (commentList) {
+		// When new comments come in via ajax
 		new MutationObserver(cb).observe(commentList, {childList: true});
+
+		// When you edit your own comment
+		commentList.addEventListener('submit', () => setTimeout(cb, 1000)); // Close enough
 	}
 }
 
