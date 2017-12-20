@@ -90,11 +90,13 @@ async function apply() {
 	const {data} = await response.json();
 
 	for (const {link, repo, type, id} of links) {
-		const state = data['repo' + escapeForGql(repo)]['id' + id].state.toLowerCase();
-		link.classList.add(stateColorMap[state]);
-		if (state !== 'open' && state + type !== 'closedpullRequest') {
-			link.querySelector('svg').outerHTML = icons[state + type];
-		}
+		try {
+			const state = data['repo' + escapeForGql(repo)]['id' + id].state.toLowerCase();
+			link.classList.add(stateColorMap[state]);
+			if (state !== 'open' && state + type !== 'closedpullRequest') {
+				link.querySelector('svg').outerHTML = icons[state + type];
+			}
+		} catch (err) {/* Probably a redirect */}
 	}
 }
 
