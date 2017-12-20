@@ -18,7 +18,7 @@ function escapeForGql(repo) {
 
 function buildGQL(links) {
 	const repoIssueMap = new Map();
-	for (const {repo, type, id} of links.values()) {
+	for (const {repo, type, id} of links) {
 		const issues = repoIssueMap.get(repo) || new Map();
 		issues.set(id, type);
 		repoIssueMap.set(repo, issues);
@@ -42,7 +42,7 @@ function buildGQL(links) {
 }
 
 function getNewLinks() {
-	const newLinks = new Map();
+	const newLinks = new Set();
 	const containers = select.all(`
 		.js-issue-title,
 		.markdown-body
@@ -56,7 +56,7 @@ function getNewLinks() {
 		let [, repo, type, id] = link.pathname.match(issueUrlRegex) || [];
 		if (id) {
 			type = type.replace('issues', 'issue').replace('pull', 'pullRequest');
-			newLinks.set(link, {repo, type, id});
+			newLinks.add({link, repo, type, id});
 		}
 	}
 	return newLinks;
@@ -68,7 +68,7 @@ async function apply() {
 		return;
 	}
 
-	for (const [link, {type}] of links) {
+	for (const {link, type} of links) {
 		link.insertAdjacentHTML('beforeEnd', icons['open' + type]);
 	}
 
@@ -82,7 +82,7 @@ async function apply() {
 	});
 	const {data} = await response.json();
 
-	for (const [link, {repo, type, id}] of links) {
+	for (const {link, repo, type, id} of links) {
 		const state = data['repo' + escapeForGql(repo)]['id' + id].state.toLowerCase();
 		link.classList.add(stateColorMap[state]);
 		if (state !== 'open' && state + type !== 'closedpullRequest') {
