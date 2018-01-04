@@ -24,7 +24,7 @@
     "storage",
     "contextMenus",
     "activeTab",
-    "api.github.com*"
+    "https://api.github.com/*"
   ],
   "optional_permissions": [
     "http://*/*",
