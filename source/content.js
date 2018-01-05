@@ -43,7 +43,7 @@ function buildGQL(links) {
 				}}
 			`).join('\n')
 		}}
-	`.replace(/\t+/g, '').replace(/\n/g, '');
+	`.replace(/\s+/g, ''); // Minify
 }
 
 function getNewLinks() {
