@@ -1,5 +1,4 @@
 import 'webext-dynamic-content-scripts';
-import select from 'select-dom';
 import OptionsSync from 'webext-options-sync';
 import * as icons from './icons';
 
@@ -48,7 +47,7 @@ function buildGQL(links) {
 
 function getNewLinks() {
 	const newLinks = new Set();
-	const links = select.all(anySelector(`
+	const links = document.querySelectorAll(anySelector(`
 		:any(
 			.js-issue-title,
 			.markdown-body
@@ -107,7 +106,7 @@ function onAjaxedPages(cb) {
 
 function onNewComments(cb) {
 	cb();
-	const commentList = select('.js-discussion');
+	const commentList = document.querySelector('.js-discussion');
 	if (commentList) {
 		// When new comments come in via ajax
 		new MutationObserver(cb).observe(commentList, {childList: true});
