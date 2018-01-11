@@ -17,7 +17,7 @@ function anySelector(selector) {
 }
 
 function escapeForGql(repo) {
-	return repo.replace(/[/-]/g, '_');
+	return repo.replace(/[./-]/g, '_');
 }
 
 function buildGQL(links) {
