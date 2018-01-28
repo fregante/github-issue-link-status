@@ -26,7 +26,7 @@ function query(q) {
 	if (__DEV__) {
 		console.log(q);
 	}
-	return q.replace(/\s+/g, ''); // Minify
+	return q.replace(/\s+/g, '').replace(/\.\.\.on/g, '...on '); // Minify, except `...on Type`
 }
 function join(iterable, merger) {
 	return [...iterable.entries()].map(merger).join('\n');
@@ -34,9 +34,9 @@ function join(iterable, merger) {
 
 function buildGQL(links) {
 	const repoIssueMap = new Map();
-	for (const {repo, type, id} of links) {
-		const issues = repoIssueMap.get(repo) || new Map();
-		issues.set(id, type);
+	for (const {repo, id} of links) {
+		const issues = repoIssueMap.get(repo) || new Set();
+		issues.add(id);
 		repoIssueMap.set(repo, issues);
 	}
 	return query(
@@ -44,9 +44,15 @@ function buildGQL(links) {
 			repo${escapeForGql(repo)}: repository(
 				owner: "${repo.split('/')[0]}",
 				name: "${repo.split('/')[1]}"
-			) {${join(issues, ([id, type]) => `
-				id${id}: ${type}(number: ${id}) {
-					state
+			) {${join(issues, ([id]) => `
+				id${id}: issueOrPullRequest(number: ${id}) {
+					__typename
+					... on PullRequest {
+						state
+					}
+					... on Issue {
+						state
+					}
 				}
 			`)}}
 		`)
@@ -69,7 +75,7 @@ function getNewLinks() {
 		link.classList.add('ILS');
 		let [, repo, type, id] = link.pathname.match(issueUrlRegex) || [];
 		if (id) {
-			type = type.replace('issues', 'issue').replace('pull', 'pullRequest');
+			type = type.replace('issues', 'issue').replace('pull', 'pullrequest');
 			newLinks.add({link, repo, type, id});
 		}
 	}
@@ -96,11 +102,13 @@ async function apply() {
 	});
 	const {data} = await response.json();
 
-	for (const {link, repo, type, id} of links) {
+	for (const {link, repo, id} of links) {
 		try {
-			const state = data['repo' + escapeForGql(repo)]['id' + id].state.toLowerCase();
+			const item = data['repo' + escapeForGql(repo)]['id' + id];
+			const state = item.state.toLowerCase();
+			const type = item.__typename.toLowerCase();
 			link.classList.add(stateColorMap[state]);
-			if (state !== 'open' && state + type !== 'closedpullRequest') {
+			if (state !== 'open' && state + type !== 'closedpullrequest') {
 				link.querySelector('svg').outerHTML = icons[state + type];
 			}
 		} catch (err) {/* Probably a redirect */}
