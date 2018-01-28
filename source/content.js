@@ -3,6 +3,7 @@ import OptionsSync from 'webext-options-sync';
 import * as icons from './icons';
 
 let token;
+const __DEV__ = false;
 const endpoint = location.hostname === 'github.com' ? 'https://api.github.com/graphql' : `${location.origin}/api/graphql`;
 const issueUrlRegex = /^[/](.+[/][^/]+)[/](issues|pull)[/](\d+)([/]|$)/;
 const stateColorMap = {
@@ -20,6 +21,17 @@ function escapeForGql(repo) {
 	return repo.replace(/[./-]/g, '_');
 }
 
+function query(q) {
+	q = `query {${q}}`;
+	if (__DEV__) {
+		console.log(q);
+	}
+	return q.replace(/\s+/g, ''); // Minify
+}
+function join(iterable, merger) {
+	return [...iterable.entries()].map(merger).join('\n');
+}
+
 function buildGQL(links) {
 	const repoIssueMap = new Map();
 	for (const {repo, type, id} of links) {
@@ -27,22 +39,18 @@ function buildGQL(links) {
 		issues.set(id, type);
 		repoIssueMap.set(repo, issues);
 	}
-	return `query
-		{${
-			[...repoIssueMap.entries()].map(([repo, issues]) => `
-				repo${escapeForGql(repo)}: repository(
-					owner: "${repo.split('/')[0]}",
-					name: "${repo.split('/')[1]}"
-				) {${
-					[...issues.entries()].map(([id, type]) => `
-						id${id}: ${type}(number: ${id}) {
-							state
-						}
-					`).join('\n')
-				}}
-			`).join('\n')
-		}}
-	`.replace(/\s+/g, ''); // Minify
+	return query(
+		join(repoIssueMap, ([repo, issues]) => `
+			repo${escapeForGql(repo)}: repository(
+				owner: "${repo.split('/')[0]}",
+				name: "${repo.split('/')[1]}"
+			) {${join(issues, ([id, type]) => `
+				id${id}: ${type}(number: ${id}) {
+					state
+				}
+			`)}}
+		`)
+	);
 }
 
 function getNewLinks() {
