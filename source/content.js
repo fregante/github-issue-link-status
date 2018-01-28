@@ -29,7 +29,7 @@ function buildGQL(links) {
 	}
 	return `query
 		{${
-			[...repoIssueMap].map(([repo, issues]) => `
+			[...repoIssueMap.entries()].map(([repo, issues]) => `
 				repo${escapeForGql(repo)}: repository(
 					owner: "${repo.split('/')[0]}",
 					name: "${repo.split('/')[1]}"
