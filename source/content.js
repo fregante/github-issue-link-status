@@ -26,7 +26,7 @@ function query(q) {
 	if (__DEV__) {
 		console.log(q);
 	}
-	return q.replace(/\s+/g, '').replace(/\.\.\.on/g, '...on '); // Minify, except `...on Type`
+	return q.replace(/\s{2,}/g, ''); // Minify
 }
 function join(iterable, merger) {
 	return [...iterable.entries()].map(merger).join('\n');
