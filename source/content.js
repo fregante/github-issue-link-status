@@ -134,7 +134,7 @@ function onNewComments(cb) {
 
 async function init() {
 	const options = await new OptionsSync().getAll();
-	token = options.token;
+	({token} = options);
 	if (token) {
 		onAjaxedPages(() => onNewComments(apply));
 	} else {
