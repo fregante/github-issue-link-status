@@ -66,7 +66,7 @@ function getNewLinks() {
 			.js-issue-title,
 			.markdown-body
 		)
-		:any(
+		a[href^="${location.origin}"]:any(
 			a[href*="/pull/"],
 			a[href*="/issues/"]
 		):not(.ILS)
