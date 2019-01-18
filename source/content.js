@@ -26,8 +26,10 @@ function query(q) {
 	if (__DEV__) {
 		console.log(q);
 	}
+
 	return q.replace(/\s{2,}/g, ''); // Minify
 }
+
 function join(iterable, merger) {
 	return [...iterable.entries()].map(merger).join('\n');
 }
@@ -39,6 +41,7 @@ function buildGQL(links) {
 		issues.add(id);
 		repoIssueMap.set(repo, issues);
 	}
+
 	return query(
 		join(repoIssueMap, ([repo, issues]) =>
 			esc(repo) + `: repository(
@@ -79,6 +82,7 @@ function getNewLinks() {
 			newLinks.add({link, repo, type, id});
 		}
 	}
+
 	return newLinks;
 }
 
@@ -111,7 +115,7 @@ async function apply() {
 			if (state !== 'open' && state + type !== 'closedpullrequest') {
 				link.querySelector('svg').outerHTML = icons[state + type];
 			}
-		} catch (err) {/* Probably a redirect */}
+		} catch (error) {/* Probably a redirect */}
 	}
 }
 
