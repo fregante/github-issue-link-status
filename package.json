@@ -22,6 +22,8 @@
     "webext-dynamic-content-scripts": "^5.0.1"
   },
   "devDependencies": {
+    "chrome-webstore-upload-cli": "^1.0.0",
+    "copy-webpack-plugin": "^4.3.0",
     "webext-options-sync": "^0.13.0",
     "webpack": "^3.8.1",
     "xo": "*"

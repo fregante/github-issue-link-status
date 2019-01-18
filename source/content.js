@@ -115,7 +115,7 @@ async function apply() {
 			if (state !== 'open' && state + type !== 'closedpullrequest') {
 				link.querySelector('svg').outerHTML = icons[state + type];
 			}
-		} catch (err) {/* Probably a redirect */}
+		} catch (error) {/* Probably a redirect */}
 	}
 }
 
