@@ -1,7 +1,7 @@
-# GitHub Issue Link Status [![Chrome version][badge-cws]][link-cws] [![Firefox version][badge-amo]][link-amo] [![deployment][badge-travis]][link-travis]
+# GitHub Issue Link Status [![deployment][badge-travis]][link-travis]
 
-  [badge-cws]: https://img.shields.io/chrome-web-store/v/nbiddhncecgemgccalnoanpnenalmkic.svg?label=chrome
-  [badge-amo]: https://img.shields.io/amo/v/github-issue-link-status.svg?label=firefox
+  [badge-cws]: https://img.shields.io/chrome-web-store/v/nbiddhncecgemgccalnoanpnenalmkic.svg?label=
+  [badge-amo]: https://img.shields.io/amo/v/github-issue-link-status.svg?label=
   [badge-travis]: https://img.shields.io/travis/bfred-it/github-issue-link-status/master.svg?label=deployment
   [link-cws]: https://chrome.google.com/webstore/detail/github-issue-link-status/nbiddhncecgemgccalnoanpnenalmkic "Version published on Chrome Web Store"
   [link-amo]: https://addons.mozilla.org/en-US/firefox/addon/github-issue-link-status/ "Version published on Mozilla Add-ons"
@@ -11,10 +11,10 @@ ILS is a browser extension that colorizes issue and PR links to see their status
 
 GitHub Enterprise is also supported. More info in the options.
 
-## Installation <img src="screenshot.png" align="right" width="640">
+## Installation <img src="screenshot.png" align="right" width="590">
 
-  + [**Chrome** extension](https://chrome.google.com/webstore/detail/github-issue-link-status/nbiddhncecgemgccalnoanpnenalmkic)
-  + [**Firefox** add-on](https://addons.mozilla.org/en-US/firefox/addon/github-issue-link-status/)
+  + [**Chrome** extension](https://chrome.google.com/webstore/detail/github-issue-link-status/nbiddhncecgemgccalnoanpnenalmkic) [![(version)][badge-cws]][link-cws]
+  + [**Firefox** add-on](https://addons.mozilla.org/en-US/firefox/addon/github-issue-link-status/) [![(version)][badge-amo]][link-amo]
   + Opera - Use [this Opera extension](https://addons.opera.com/en/extensions/details/download-chrome-extension-9/) to install the Chrome version.
 
 
