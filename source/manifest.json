@@ -4,7 +4,7 @@
   "manifest_version": 2,
   "description": "Colorize issue and PR links to see their status (open, closed, merged)",
   "author": "Federico Brigante",
-  "homepage_url": "https://github.com/bfred-it/github-issue-link-status",
+  "homepage_url": "https://github.com/fregante/github-issue-link-status",
   "icons": {
     "128": "icon.png"
   },

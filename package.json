@@ -1,21 +1,22 @@
 {
+  "repository": "fregante/github-issue-link-status",
   "scripts": {
-    "test": "xo && npm run build",
     "build": "webpack",
-    "watch": "webpack --watch",
+    "release": "npm run build && npm run update-version && npm run release-amo && npm run release-cws",
     "release-amo": "cd distribution && web-ext-submit",
     "release-cws": "cd distribution && webstore upload --auto-publish",
-    "release": "npm run build && npm run update-version && npm run release-amo && npm run release-cws",
-    "update-version": "VERSION=$(date -u +%y.%-m.%-d.%-H%M); echo $VERSION; dot-json distribution/manifest.json version $VERSION"
+    "test": "xo && npm run build",
+    "update-version": "VERSION=$(date -u +%y.%-m.%-d.%-H%M); echo $VERSION; dot-json distribution/manifest.json version $VERSION",
+    "watch": "webpack --watch"
   },
   "xo": {
-    "rules": {
-      "import/no-unassigned-import": 0
-    },
     "envs": [
       "browser",
       "webextensions"
-    ]
+    ],
+    "rules": {
+      "import/no-unassigned-import": 0
+    }
   },
   "dependencies": {
     "webext-domain-permission-toggle": "0.0.2",
