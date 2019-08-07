@@ -1,7 +1,7 @@
 import 'webext-dynamic-content-scripts';
 import OptionsSync from 'webext-options-sync';
 import addDomainPermissionToggle from 'webext-domain-permission-toggle';
-import './options-storage'l
+import './options-storage'
 
 // GitHub Enterprise support
 addDomainPermissionToggle();
