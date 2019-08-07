@@ -1,3 +1,3 @@
-import OptionsSync from 'webext-options-sync';
+import options from './options-storage';
 
-new OptionsSync().syncForm('#options-form');
+options.syncForm('#options-form');

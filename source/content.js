@@ -1,5 +1,4 @@
-import 'webext-dynamic-content-scripts';
-import OptionsSync from 'webext-options-sync';
+import options from './options-storage';
 import * as icons from './icons';
 
 let token;
@@ -137,8 +136,7 @@ function onNewComments(cb) {
 }
 
 async function init() {
-	const options = await new OptionsSync().getAll();
-	({token} = options);
+	({token} = await options.getAll());
 	if (token) {
 		onAjaxedPages(() => onNewComments(apply));
 	} else {

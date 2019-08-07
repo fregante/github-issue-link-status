@@ -1,6 +1,5 @@
 'use strict';
 const path = require('path');
-const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -10,7 +9,6 @@ module.exports = {
 		options: './source/options'
 	},
 	plugins: [
-		new webpack.optimize.ModuleConcatenationPlugin(),
 		new CopyWebpackPlugin([{
 			from: '**',
 			context: 'source',

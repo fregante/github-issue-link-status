@@ -1,17 +1,9 @@
-import OptionsSync from 'webext-options-sync';
-import domainPermissionToggle from 'webext-domain-permission-toggle';
-import dynamicContentScripts from 'webext-dynamic-content-scripts';
-
-// Define defaults
-new OptionsSync().define({
-	defaults: {
-		token: ''
-	}
-});
+import 'webext-dynamic-content-scripts';
+import addDomainPermissionToggle from 'webext-domain-permission-toggle';
+import './options-storage';
 
 // GitHub Enterprise support
-dynamicContentScripts.addToFutureTabs();
-domainPermissionToggle.addContextMenu();
+addDomainPermissionToggle();
 
 // Open options to add the token
 chrome.runtime.onInstalled.addListener(event => {
