@@ -1,47 +1,24 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<title>ILS options</title>
-<style>
-	:root {
-		--github-green: #28a745;
-		--github-purple: #6f42c1;
-		--github-red: #cb2431;
-	}
-	body {
-		width: 350px;
-		margin: 14px 17px; /* Chrome default, match for Firefox */
-		font-family: sans-serif;
-	}
-	/* Increase spacing between sections */
-	h2 ~ h2,
-	form ~ form {
-		margin-top: 2em;
-	}
-	textarea {
-		width: 100%;
-	}
-
-	input:valid {
-		color: var(--github-green);
-		border: 1px solid;
-	}
-
-	input:invalid {
-		color: var(--github-red);
-		border: 1px solid;
-	}
-
-</style>
-<form id="options-form">
-	<h2>Enter a GitHub API personal token</h2>
-	<p>The token is required to make a GitHub v4 API call. <a href="https://github.com/settings/tokens/new?scopes=repo&description=GitHub%20Issue%20Link%20Status" target="_blank">Generate one</a> and add it here. This will only be stored locally (and in the browser’s sync, if enabled).</p>
+<title>Options • GitHub Issue Link Status</title>
+<link rel="stylesheet" href="options.css">
+<link rel="stylesheet" href="chrome://global/skin/in-content/common.css">
+<form id="options-form" class="detail-view-container">
 	<p>
-		<input name="token" spellcheck="false" autocomplete="off" size="50" maxlength="40" pattern="[0-9a-f]{40}" required>
+		<label>
+			<strong>Personal token</strong>, required to make a GitHub v4 API call. <a
+				href="https://github.com/settings/tokens/new?scopes=repo&description=GitHub%20Issue%20Link%20Status"
+				target="_blank">Generate one</a> and add it here. <br>
+			 This will only be stored locally (and in the browser’s sync, if
+			enabled).<br>
+			<input type="text" name="token" spellcheck="false" autocomplete="off" pattern="[\da-f]{40}" required/>
+		</label>
 	</p>
-	<h2>GitHub Enterprise</h2>
+
+	<hr>
+
 	<p>
-		While on your GitHub, right-click on the extensions icon in the toolbar and select <strong>Enable extension on this domain</strong>.
-		<a href="https://user-images.githubusercontent.com/1402241/32874388-e0c64150-cacc-11e7-9a50-eae3727fd3c2.png" target="_blank">Example</a>. This is <a href="https://github.com/sindresorhus/refined-github/issues/840#issuecomment-349936195" target="_blank">not yet supported by Firefox</a>.
+		If you're a GitHub Enterprise user, visit your Enterprise site, right-click on <a href="https://user-images.githubusercontent.com/1402241/32874388-e0c64150-cacc-11e7-9a50-eae3727fd3c2.png" target="_blank">the extension’s icon in the toolbar</a> and select <strong>Enable GitHub Issue Link Status on this domain</strong>.
 	</p>
 </form>
 <script src="options.js"></script>
