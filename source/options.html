@@ -1,23 +1,20 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <title>Options • GitHub Issue Link Status</title>
-<link rel="stylesheet" href="options.css">
 <link rel="stylesheet" href="chrome://global/skin/in-content/common.css">
+<link rel="stylesheet" href="webext-base.css">
+<link rel="stylesheet" href="options.css">
 <form id="options-form" class="detail-view-container">
 	<p>
-		<label>
-			<strong>Personal token</strong>, required to make a GitHub v4 API call. <a
-				href="https://github.com/settings/tokens/new?scopes=repo&description=GitHub%20Issue%20Link%20Status"
-				target="_blank">Generate one</a> and add it here. <br>
-			 This will only be stored locally (and in the browser’s sync, if
-			enabled).<br>
-			<input type="text" name="token" spellcheck="false" autocomplete="off" pattern="[\da-f]{40}" required/>
-		</label>
+		<label for="token"><strong>Personal token</strong></label> <br>
+		Required to make a GitHub v4 API call. <a href="https://github.com/settings/tokens/new?scopes=repo&description=GitHub%20Issue%20Link%20Status"
+			target="_blank">Generate one</a> and add it here.<br>
+		This will only be stored locally (and in the browser’s sync, if enabled). <br>
+		<input type="text" id="token" name="token" spellcheck="false" autocomplete="off" pattern="[\da-f]{40}" required/>
 	</p>
 
-	<hr>
-
 	<p>
+		<strong>GitHub Enterprise</strong><br>
 		If you're a GitHub Enterprise user, visit your Enterprise site, right-click on <a href="https://user-images.githubusercontent.com/1402241/32874388-e0c64150-cacc-11e7-9a50-eae3727fd3c2.png" target="_blank">the extension’s icon in the toolbar</a> and select <strong>Enable GitHub Issue Link Status on this domain</strong>.
 	</p>
 </form>

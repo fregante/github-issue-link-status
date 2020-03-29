@@ -16,6 +16,9 @@ module.exports = {
 				ignore: [
 					'*.js'
 				]
+			},
+			{
+				from: 'node_modules/webext-base-css/webext-base.css'
 			}
 		])
 	],
