@@ -34,7 +34,7 @@ jobs:
     - uses: actions/download-artifact@v1
       with:
         name: built-extension
-    - run: npx chrome-webstore-upload-cli upload --auto-publish
+    - run: npx chrome-webstore-upload-cli@1 upload --auto-publish
       env:
         EXTENSION_ID: nbiddhncecgemgccalnoanpnenalmkic
         CLIENT_ID: ${{ secrets.CLIENT_ID }}
@@ -48,7 +48,7 @@ jobs:
     - uses: actions/download-artifact@v1
       with:
         name: built-extension
-    - run: npx web-ext-submit
+    - run: npx web-ext-submit@4
       env:
         WEB_EXT_API_KEY: ${{ secrets.WEB_EXT_API_KEY }}
         WEB_EXT_API_SECRET: ${{ secrets.WEB_EXT_API_SECRET }}
