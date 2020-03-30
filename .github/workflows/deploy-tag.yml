@@ -24,8 +24,8 @@ jobs:
         npm run version
     - uses: actions/upload-artifact@v1
       with:
-        name: built-extension
         path: distribution
+        name: distribution
 
   deploy-to-chrome:
     needs: build
@@ -33,8 +33,8 @@ jobs:
     steps:
     - uses: actions/download-artifact@v1
       with:
-        name: built-extension
-    - run: npx chrome-webstore-upload-cli@1 upload --auto-publish
+        name: distribution
+    - run: cd distribution && npx chrome-webstore-upload-cli@1 upload --auto-publish
       env:
         EXTENSION_ID: nbiddhncecgemgccalnoanpnenalmkic
         CLIENT_ID: ${{ secrets.CLIENT_ID }}
@@ -47,8 +47,8 @@ jobs:
     steps:
     - uses: actions/download-artifact@v1
       with:
-        name: built-extension
-    - run: npx web-ext-submit@4
+        name: distribution
+    - run: cd distribution && npx web-ext-submit@4
       env:
         WEB_EXT_API_KEY: ${{ secrets.WEB_EXT_API_KEY }}
         WEB_EXT_API_SECRET: ${{ secrets.WEB_EXT_API_SECRET }}
