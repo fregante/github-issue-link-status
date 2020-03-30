@@ -1,13 +1,14 @@
 {
   "repository": "fregante/github-issue-link-status",
   "scripts": {
-    "build": "webpack --mode production",
-    "release": "npm run build && npm run update-version && npm run release-amo && npm run release-cws",
-    "release-amo": "cd distribution && web-ext-submit",
-    "release-cws": "cd distribution && webstore upload --auto-publish",
+    "lint": "xo",
     "test": "xo && npm run build",
-    "update-version": "VERSION=$(date -u +%y.%-m.%-d.%-H%M); echo $VERSION; dot-json distribution/manifest.json version $VERSION",
-    "watch": "webpack --mode production --watch"
+    "build": "webpack --mode=production",
+    "watch": "webpack --mode=development --watch",
+    "version": "dot-json distribution/manifest.json version $VER",
+    "release:cws": "webstore upload --source=distribution --auto-publish",
+    "release:amo": "web-ext-submit --source-dir distribution",
+    "release": "VER=$(daily-version) run-s build version release:*"
   },
   "xo": {
     "envs": [
