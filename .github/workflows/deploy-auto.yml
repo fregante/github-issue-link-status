@@ -15,7 +15,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - run: |
           if [[ $(git tag -l --points-at HEAD) = "" ]]; then
-            export VER=$(npx daily-version)
+            VER=$(npx daily-version)
             git tag $VER -m $VER
             git push origin $VER
           fi
