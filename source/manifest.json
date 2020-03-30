@@ -43,10 +43,10 @@
         "https://github.com/*"
       ],
       "js": [
-        "content.js"
+        "github-issue-link-status.js"
       ],
       "css": [
-        "content.css"
+        "github-issue-link-status.css"
       ]
     }
   ]

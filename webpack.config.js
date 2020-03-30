@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 	entry: {
-		content: './source/content',
+		'github-issue-link-status': './source/github-issue-link-status',
 		background: './source/background',
 		options: './source/options'
 	},
