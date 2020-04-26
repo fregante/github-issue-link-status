@@ -8,8 +8,14 @@ const issueUrlRegex = /^[/]([^/]+[/][^/]+)[/](issues|pull)[/](\d+)([/]|$)/;
 const stateColorMap = {
 	open: 'text-green',
 	closed: 'text-red',
-	merged: 'text-purple'
+	merged: 'text-purple',
+	draft: 'text-gray'
 };
+
+const stateDependentIcons = [
+	'closedissue',
+	'mergedpullrequest'
+];
 
 function anySelector(selector) {
 	const prefix = document.head.style.MozOrient === '' ? 'moz' : 'webkit';
@@ -50,7 +56,8 @@ function buildGQL(links) {
 				${esc(id)}: issueOrPullRequest(number: ${id}) {
 					__typename
 					... on PullRequest {
-						state
+						state,
+						isDraft
 					}
 					... on Issue {
 						state
@@ -108,10 +115,14 @@ async function apply() {
 	for (const {link, repo, id} of links) {
 		try {
 			const item = data[esc(repo)][esc(id)];
-			const state = item.state.toLowerCase();
 			const type = item.__typename.toLowerCase();
+			let state = item.state.toLowerCase();
+			if (item.isDraft && state === 'open') {
+				state = 'draft';
+			}
+
 			link.classList.add(stateColorMap[state]);
-			if (state !== 'open' && state + type !== 'closedpullrequest') {
+			if (stateDependentIcons.includes(state + type)) {
 				link.querySelector('svg').outerHTML = icons[state + type];
 			}
 		} catch {/* Probably a redirect */}
