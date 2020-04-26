@@ -14,7 +14,7 @@ const stateColorMap = {
 
 const stateDependentIcons = [
 	'closedissue',
-	'mergedpullrequest',
+	'mergedpullrequest'
 ];
 
 function anySelector(selector) {
@@ -115,8 +115,12 @@ async function apply() {
 	for (const {link, repo, id} of links) {
 		try {
 			const item = data[esc(repo)][esc(id)];
-			const state = item.isDraft ? 'draft' : item.state.toLowerCase();
 			const type = item.__typename.toLowerCase();
+			let state = item.state.toLowerCase();
+			if (item.isDraft && state === 'open') {
+				state = 'draft';
+			}
+
 			link.classList.add(stateColorMap[state]);
 			if (stateDependentIcons.includes(state + type)) {
 				link.querySelector('svg').outerHTML = icons[state + type];
