@@ -12,6 +12,11 @@ const stateColorMap = {
 	draft: 'text-gray'
 };
 
+const stateDependentIcons = [
+	'closedissue',
+	'mergedpullrequest',
+];
+
 function anySelector(selector) {
 	const prefix = document.head.style.MozOrient === '' ? 'moz' : 'webkit';
 	return selector.replace(/:any\(/g, `:-${prefix}-any(`);
@@ -113,7 +118,7 @@ async function apply() {
 			const state = item.isDraft ? 'draft' : item.state.toLowerCase();
 			const type = item.__typename.toLowerCase();
 			link.classList.add(stateColorMap[state]);
-			if (state !== 'open' && state + type !== 'closedpullrequest') {
+			if (stateDependentIcons.includes(state + type)) {
 				link.querySelector('svg').outerHTML = icons[state + type];
 			}
 		} catch {/* Probably a redirect */}
