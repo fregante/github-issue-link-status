@@ -3,6 +3,7 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+	devtool: 'source-map',
 	entry: {
 		'github-issue-link-status': './source/github-issue-link-status',
 		background: './source/background',
