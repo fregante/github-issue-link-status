@@ -8,7 +8,8 @@ const issueUrlRegex = /^[/]([^/]+[/][^/]+)[/](issues|pull)[/](\d+)([/]|$)/;
 const stateColorMap = {
 	open: 'text-green',
 	closed: 'text-red',
-	merged: 'text-purple'
+	merged: 'text-purple',
+	draft: 'text-gray'
 };
 
 function anySelector(selector) {
@@ -51,6 +52,7 @@ function buildGQL(links) {
 					__typename
 					... on PullRequest {
 						state
+						isDraft
 					}
 					... on Issue {
 						state
@@ -108,7 +110,7 @@ async function apply() {
 	for (const {link, repo, id} of links) {
 		try {
 			const item = data[esc(repo)][esc(id)];
-			const state = item.state.toLowerCase();
+			const state = item.isDraft ? 'draft' : item.state.toLowerCase();
 			const type = item.__typename.toLowerCase();
 			link.classList.add(stateColorMap[state]);
 			if (state !== 'open' && state + type !== 'closedpullrequest') {
