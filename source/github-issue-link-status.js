@@ -51,7 +51,7 @@ function buildGQL(links) {
 				${esc(id)}: issueOrPullRequest(number: ${id}) {
 					__typename
 					... on PullRequest {
-						state
+						state,
 						isDraft
 					}
 					... on Issue {
