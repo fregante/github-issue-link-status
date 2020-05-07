@@ -1,43 +1,44 @@
 {
-  "repository": "fregante/github-issue-link-status",
-  "scripts": {
-    "lint": "xo",
-    "test": "xo && npm run build",
-    "build": "webpack --mode=production",
-    "watch": "webpack --mode=development --watch",
-    "version": "dot-json distribution/manifest.json version $VER",
-    "release:cws": "webstore upload --source=distribution --auto-publish",
-    "release:amo": "web-ext-submit --source-dir distribution",
-    "release": "VER=$(daily-version) run-s build version release:*"
-  },
-  "xo": {
-    "envs": [
-      "browser",
-      "webextensions"
-    ],
-    "rules": {
-      "import/no-unassigned-import": 0,
-      "import/no-extraneous-dependencies": 0,
-      "unicorn/string-content": 0,
-      "unicorn/better-regex": 0
-    },
-    "parserOptions": {
-      "ecmaVersion": 2019
-    }
-  },
-  "dependencies": {
-    "webext-base-css": "^1.0.0",
-    "webext-domain-permission-toggle": "^1.0.0",
-    "webext-dynamic-content-scripts": "^6.0.3",
-    "webext-options-sync": "^1.2.2"
-  },
-  "devDependencies": {
-    "chrome-webstore-upload-cli": "^1.2.0",
-    "copy-webpack-plugin": "^5.1.1",
-    "dot-json": "^1.2.0",
-    "web-ext-submit": "^4.1.0",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11",
-    "xo": "^0.28.1"
-  }
+	"repository": "fregante/github-issue-link-status",
+	"scripts": {
+		"build": "webpack --mode=production",
+		"lint": "xo",
+		"release": "VER=$(daily-version) run-s build version release:*",
+		"release:amo": "web-ext-submit --source-dir distribution",
+		"release:cws": "webstore upload --source=distribution --auto-publish",
+		"test": "xo && npm run build",
+		"version": "dot-json distribution/manifest.json version $VER",
+		"watch": "webpack --mode=development --watch"
+	},
+	"xo": {
+		"envs": [
+			"browser",
+			"webextensions"
+		],
+		"parserOptions": {
+			"ecmaVersion": 2019
+		},
+		"rules": {
+			"import/no-unassigned-import": 0,
+			"import/no-extraneous-dependencies": 0,
+			"unicorn/prefer-set-has": 0,
+			"unicorn/better-regex": 0,
+			"unicorn/no-fn-reference-in-iterator": 0
+		}
+	},
+	"dependencies": {
+		"webext-base-css": "^1.0.0",
+		"webext-domain-permission-toggle": "^1.0.0",
+		"webext-dynamic-content-scripts": "^6.0.3",
+		"webext-options-sync": "^1.2.2"
+	},
+	"devDependencies": {
+		"chrome-webstore-upload-cli": "^1.2.0",
+		"copy-webpack-plugin": "^5.1.1",
+		"dot-json": "^1.2.0",
+		"web-ext-submit": "^4.1.0",
+		"webpack": "^4.42.1",
+		"webpack-cli": "^3.3.11",
+		"xo": "^0.28.1"
+	}
 }
