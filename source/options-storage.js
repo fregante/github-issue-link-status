@@ -1,7 +1,9 @@
-import OptionsSync from 'webext-options-sync';
+import OptionsSyncMulti from 'webext-options-sync-multi';
 
-export default new OptionsSync({
+export const multiOptions = new OptionsSyncMulti({
 	defaults: {
 		token: ''
 	}
 });
+
+export default multiOptions.getOptionsForOrigin();
