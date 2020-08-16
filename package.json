@@ -30,9 +30,10 @@
 		"webext-base-css": "^1.1.0",
 		"webext-domain-permission-toggle": "^1.0.1",
 		"webext-dynamic-content-scripts": "^6.0.5",
-		"webext-options-sync-per-domain": "^1.0.0"
+		"webext-options-sync-per-domain": "^2.0.0-0"
 	},
 	"devDependencies": {
+		"babel-cli": "^6.26.0",
 		"chrome-webstore-upload-cli": "^1.2.0",
 		"dot-json": "^1.2.0",
 		"parcel-bundler": "^1.12.4",
