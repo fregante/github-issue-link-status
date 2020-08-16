@@ -1,14 +1,14 @@
 {
 	"repository": "fregante/github-issue-link-status",
 	"scripts": {
-		"build": "webpack --mode=production",
+		"build": "parcel build source/manifest.json -d distribution --experimental-scope-hoisting --no-cache --no-source-maps --no-minify && babel distribution -d distribution --no-comments",
 		"lint": "xo",
 		"release": "VER=$(daily-version) run-s build version release:*",
 		"release:amo": "web-ext-submit --source-dir distribution",
 		"release:cws": "webstore upload --source=distribution --auto-publish",
 		"test": "xo && npm run build",
 		"version": "dot-json distribution/manifest.json version $VER",
-		"watch": "webpack --mode=development --watch"
+		"watch": "parcel watch source/manifest.json -d distribution --no-cache --no-hmr"
 	},
 	"xo": {
 		"envs": [
@@ -34,11 +34,14 @@
 	},
 	"devDependencies": {
 		"chrome-webstore-upload-cli": "^1.2.0",
-		"copy-webpack-plugin": "^6.0.3",
 		"dot-json": "^1.2.0",
+		"parcel-bundler": "^1.12.4",
+		"parcel-plugin-web-extension": "^1.6.1",
 		"web-ext-submit": "^5.0.2",
-		"webpack": "^4.44.1",
-		"webpack-cli": "^3.3.12",
 		"xo": "^0.33.0"
-	}
+	},
+	"browserslist": [
+		"last 1 Chrome version",
+		"last 1 Firefox version"
+	]
 }
