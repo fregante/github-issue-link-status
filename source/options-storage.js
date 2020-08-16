@@ -1,7 +1,9 @@
-import OptionsSync from 'webext-options-sync';
+import OptionsSyncPerDomain from 'webext-options-sync-per-domain';
 
-export default new OptionsSync({
+export const perDomainOptions = new OptionsSyncPerDomain({
 	defaults: {
 		token: ''
 	}
 });
+
+export default perDomainOptions.getOptionsForOrigin();
