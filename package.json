@@ -1,7 +1,7 @@
 {
 	"repository": "fregante/github-issue-link-status",
 	"scripts": {
-		"build": "parcel build source/manifest.json -d distribution --experimental-scope-hoisting --no-cache --no-source-maps --no-minify && babel distribution -d distribution --no-comments",
+		"build": "parcel build source/manifest.json -d distribution --experimental-scope-hoisting --no-cache",
 		"lint": "xo",
 		"release": "VER=$(daily-version) run-s build version release:*",
 		"release:amo": "web-ext-submit --source-dir distribution",
@@ -33,7 +33,6 @@
 		"webext-options-sync-per-domain": "^2.0.0-0"
 	},
 	"devDependencies": {
-		"@babel/cli": "^7.10.5",
 		"chrome-webstore-upload-cli": "^1.2.0",
 		"dot-json": "^1.2.0",
 		"parcel-bundler": "^1.12.4",
