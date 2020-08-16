@@ -110,6 +110,11 @@ async function apply() {
 		},
 		body: JSON.stringify({query})
 	});
+	if (response.status === 401) {
+		console.error('GitHub Issue Link Status: The token was not accepted, it’s likely expired');
+		return;
+	}
+
 	const {data} = await response.json();
 
 	for (const {link, repo, id} of links) {
