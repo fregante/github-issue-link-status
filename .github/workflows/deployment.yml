@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm install
+      - run: npm ci
       - run: npm test # This includes the build
       - uses: fregante/daily-version-action@v1
         name: Create tag if necessary
@@ -24,7 +24,7 @@ jobs:
         env:
           VER: ${{ steps.daily-version.outputs.version }}
         run: |
-          echo https://github.com/$GITHUB_REPOSITORY/tree/$VER > distribution/SOURCE_URL
+          echo https://github.com/$GITHUB_REPOSITORY/tree/$VER > distribution/SOURCE_URL.txt
           npm run version
       - uses: actions/upload-artifact@v2
         with:
@@ -32,7 +32,7 @@ jobs:
 
   Chrome:
     needs: Build
-    if: github.event_name == 'push' || needs.Build.outputs.created
+    if: github.event_name == 'workflow_dispatch' || needs.Build.outputs.created
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v2
@@ -45,7 +45,7 @@ jobs:
 
   Firefox:
     needs: Build
-    if: github.event_name == 'push' || needs.Build.outputs.created
+    if: github.event_name == 'workflow_dispatch' || needs.Build.outputs.created
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v2
