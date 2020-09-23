@@ -27,3 +27,6 @@ jobs:
         with:
           name: github-issue-link-status
           path: distribution
+      - run: npx bundlewatch
+        env:
+          BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
