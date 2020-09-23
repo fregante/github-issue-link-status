@@ -27,3 +27,6 @@ jobs:
         with:
           name: github-issue-link-status
           path: distribution
+      - run: npx bundlewatch
+        env:
+          BUNDLEWATCH_GITHUB_TOKEN: a494d51041a39c608fc08180126e8a9faa8d3beb
