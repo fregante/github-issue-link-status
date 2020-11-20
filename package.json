@@ -3,11 +3,9 @@
 	"scripts": {
 		"build": "parcel build source/manifest.json -d distribution --experimental-scope-hoisting --no-cache",
 		"lint": "xo",
-		"release": "VER=$(daily-version) run-s build version release:*",
-		"release:amo": "web-ext-submit --source-dir distribution",
-		"release:cws": "webstore upload --source=distribution --auto-publish",
+		"release:chrome": "cd distribution && webstore upload --auto-publish",
+		"release:firefox": "cd distribution && web-ext-submit",
 		"test": "xo && npm run build",
-		"version": "dot-json distribution/manifest.json version $VER",
 		"watch": "parcel watch source/manifest.json -d distribution --no-cache --no-hmr"
 	},
 	"browserslist": [
@@ -19,12 +17,8 @@
 			"browser",
 			"webextensions"
 		],
-		"parserOptions": {
-			"ecmaVersion": 2019
-		},
 		"rules": {
 			"import/no-unassigned-import": "off",
-			"import/no-extraneous-dependencies": "off",
 			"unicorn/prefer-set-has": "off",
 			"unicorn/better-regex": "off",
 			"unicorn/no-fn-reference-in-iterator": "off"
@@ -43,7 +37,7 @@
 		"parcel-bundler": "^1.12.4",
 		"parcel-plugin-web-extension": "^1.6.1",
 		"web-ext-submit": "^5.1.0",
-		"xo": "^0.33.1"
+		"xo": "^0.35.0"
 	},
 	"bundlewatch": {
 		"files": [
