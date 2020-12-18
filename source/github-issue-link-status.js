@@ -8,8 +8,7 @@ const issueUrlRegex = /^[/]([^/]+[/][^/]+)[/](issues|pull)[/](\d+)([/]|$)/;
 const stateColorMap = {
 	open: 'text-green',
 	closed: 'text-red',
-	merged: 'text-purple',
-	draft: 'text-gray'
+	merged: 'text-purple'
 };
 
 const stateDependentIcons = [
@@ -121,12 +120,13 @@ async function apply() {
 		try {
 			const item = data[esc(repo)][esc(id)];
 			const type = item.__typename.toLowerCase();
-			let state = item.state.toLowerCase();
-			if (item.isDraft && state === 'open') {
-				state = 'draft';
-			}
+			const state = item.state.toLowerCase();
 
 			link.classList.add(stateColorMap[state]);
+			if (item.isDraft) {
+				link.querySelector('svg').classList.add('text-gray');
+			}
+
 			if (stateDependentIcons.includes(state + type)) {
 				link.querySelector('svg').outerHTML = icons[state + type];
 			}
