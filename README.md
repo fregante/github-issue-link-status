@@ -9,7 +9,7 @@ ILS is a browser extension that colorizes issue and PR links to see their status
 
 GitHub Enterprise is also supported. More info in the options.
 
-## Installation <img src="screenshot.png" align="right" width="590">
+## Installation <img src="screenshot.png" align="right" width="560">
 
 - [**Chrome** extension](https://chrome.google.com/webstore/detail/github-issue-link-status/nbiddhncecgemgccalnoanpnenalmkic) [![][badge-cws]][link-cws]
 - [**Firefox** add-on](https://addons.mozilla.org/en-US/firefox/addon/github-issue-link-status/) [![][badge-amo]][link-amo]

@@ -5,7 +5,7 @@
 .ILS svg {
 	font-size: calc(1em / 14 * 8.125); /* Turn into em and make it 19% smaller */
 	vertical-align: -15%;
-	margin-left: 0.2em;
+	margin-left: 0.3em;
 }
 .ILS + .ILS {
 	margin-left: 0.1em;
