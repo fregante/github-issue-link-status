@@ -3,8 +3,6 @@
 	"scripts": {
 		"build": "parcel build source/manifest.json --dist-dir distribution --no-cache --detailed-report 0",
 		"lint": "xo",
-		"release:chrome": "cd distribution && webstore upload --auto-publish",
-		"release:firefox": "cd distribution && web-ext-submit",
 		"test": "xo && npm run build",
 		"watch": "parcel watch source/manifest.json --dist-dir distribution --no-cache --no-hmr"
 	},
@@ -20,8 +18,7 @@
 		"rules": {
 			"import/no-unassigned-import": "off",
 			"unicorn/prefer-set-has": "off",
-			"unicorn/better-regex": "off",
-			"unicorn/no-fn-reference-in-iterator": "off"
+			"unicorn/better-regex": "off"
 		}
 	},
 	"dependencies": {
@@ -33,12 +30,10 @@
 	"devDependencies": {
 		"@parcel/config-webextension": "^2.0.0-nightly.2164",
 		"@parcel/transformer-webextension": "^2.0.0-nightly.2164",
-		"bundlewatch": "^0.3.1",
-		"chrome-webstore-upload-cli": "^1.2.0",
+		"bundlewatch": "^0.3.2",
 		"dot-json": "^1.2.1",
 		"parcel": "^2.0.0-nightly.540",
-		"web-ext-submit": "^5.4.1",
-		"xo": "^0.36.1"
+		"xo": "^0.37.1"
 	},
 	"bundlewatch": {
 		"files": [

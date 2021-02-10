@@ -1,4 +1,4 @@
-import {perDomainOptions} from './options-storage';
+import {perDomainOptions} from './options-storage.js';
 
 async function init() {
 	await perDomainOptions.syncForm('form');

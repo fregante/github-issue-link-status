@@ -1,5 +1,5 @@
-import options from './options-storage';
-import * as icons from './icons';
+import options from './options-storage.js';
+import * as icons from './icons.js';
 
 let token;
 const __DEV__ = false;
@@ -35,7 +35,7 @@ function query(q) {
 }
 
 function join(iterable, merger) {
-	return [...iterable.entries()].map(merger).join('\n');
+	return [...iterable.entries()].map(item => merger(item)).join('\n');
 }
 
 function buildGQL(links) {
