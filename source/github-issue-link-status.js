@@ -137,20 +137,16 @@ async function apply() {
 function onAjaxedPages(cb) {
 	cb();
 	document.addEventListener('pjax:end', cb);
-	document.addEventListener("DOMNodeInserted", (event) => {
-		if (
-		  event &&
-		  event.relatedNode &&
-		  event.relatedNode.classList.contains("js-project-card-details")
-		) {
-		  cb();
+	document.addEventListener('DOMNodeInserted', event => {
+		if (event && event.relatedNode && event.relatedNode.classList.contains('js-project-card-details')) {
+			cb();
 		}
-	  });
+	});
 }
 
 function onNewComments(cb) {
 	cb();
-	const commentList = document.querySelector('.js-discussion') || document.querySelector(".project-issue-body-wrapper");;
+	const commentList = document.querySelector('.js-discussion') || document.querySelector('.project-issue-body-wrapper');
 	if (commentList) {
 		// When new comments come in via ajax
 		new MutationObserver(cb).observe(commentList, {childList: true});
