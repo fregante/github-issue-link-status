@@ -6,9 +6,9 @@ const __DEV__ = false;
 const endpoint = location.hostname === 'github.com' ? 'https://api.github.com/graphql' : `${location.origin}/api/graphql`;
 const issueUrlRegex = /^[/]([^/]+[/][^/]+)[/](issues|pull)[/](\d+)([/]|$)/;
 const stateColorMap = {
-	open: 'text-green',
-	closed: 'text-red',
-	merged: 'text-purple'
+	open: ['text-green', 'color-text-success'],
+	closed: ['text-red', 'color-text-danger'],
+	merged: ['text-purple', 'color-purple-5']
 };
 
 const stateDependentIcons = [
@@ -122,9 +122,9 @@ async function apply() {
 			const type = item.__typename.toLowerCase();
 			const state = item.state.toLowerCase();
 
-			link.classList.add(stateColorMap[state]);
+			link.classList.add(...stateColorMap[state]);
 			if (item.isDraft) {
-				link.querySelector('svg').classList.add('text-gray');
+				link.querySelector('svg').classList.add('text-gray', 'color-text-secondary');
 			}
 
 			if (stateDependentIcons.includes(state + type)) {
