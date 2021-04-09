@@ -3,7 +3,10 @@ import * as icons from './icons.js';
 
 let token;
 const __DEV__ = false;
-const endpoint = location.hostname === 'github.com' ? 'https://api.github.com/graphql' : `${location.origin}/api/graphql`;
+const endpoint =
+	location.hostname === 'github.com' ?
+		'https://api.github.com/graphql' :
+		`${location.origin}/api/graphql`;
 const issueUrlRegex = /^[/]([^/]+[/][^/]+)[/](issues|pull)[/](\d+)([/]|$)/;
 const stateColorMap = {
 	open: ['text-green', 'color-text-success'],
@@ -47,8 +50,11 @@ function buildGQL(links) {
 	}
 
 	return query(
-		join(repoIssueMap, ([repo, issues]) =>
-			esc(repo) + `: repository(
+		join(
+			repoIssueMap,
+			([repo, issues]) =>
+				esc(repo) +
+				`: repository(
 				owner: "${repo.split('/')[0]}",
 				name: "${repo.split('/')[1]}"
 			) {${join(issues, ([id]) => `

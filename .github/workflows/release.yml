@@ -3,13 +3,11 @@ env:
 
 # FILE GENERATED WITH: npx ghat fregante/ghatemplates/webext
 # SOURCE: https://github.com/fregante/ghatemplates
-# OPTIONS: {"set":["on.schedule=[{\"cron\": \"31 19 1 * *\"}]"]}
+# OPTIONS: {"exclude":["on.schedule"]}
 
 name: Release
 on:
   workflow_dispatch: null
-  schedule:
-    - cron: 31 19 1 * *
 jobs:
   Version:
     outputs:
