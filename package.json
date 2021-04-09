@@ -1,4 +1,5 @@
 {
+	"private": true,
 	"repository": "fregante/github-issue-link-status",
 	"scripts": {
 		"build": "parcel build source/manifest.json --dist-dir distribution --no-cache --detailed-report 0",
