@@ -1,5 +1,5 @@
 {
-	"repository": "fregante/github-issue-link-status",
+	"private": true,
 	"scripts": {
 		"build": "parcel build source/manifest.json --dist-dir distribution --no-cache --detailed-report 0",
 		"lint": "xo",
@@ -8,7 +8,7 @@
 	},
 	"browserslist": [
 		"last 1 Chrome version",
-		"last 1 Firefox version"
+		"Firefox 52"
 	],
 	"xo": {
 		"envs": [
@@ -28,10 +28,9 @@
 		"webext-options-sync-per-domain": "^2.0.2"
 	},
 	"devDependencies": {
-		"@parcel/config-webextension": "^2.0.0-nightly.2250",
-		"@parcel/transformer-webextension": "^2.0.0-nightly.2250",
+		"@parcel/config-webextension": "^2.0.0-nightly.2260",
 		"bundlewatch": "^0.3.2",
-		"parcel": "^2.0.0-nightly.626",
+		"parcel": "^2.0.0-nightly.636",
 		"xo": "^0.38.2"
 	},
 	"bundlewatch": {

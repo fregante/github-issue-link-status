@@ -1,6 +1,6 @@
 {
 	"name": "GitHub Issue Link Status",
-	"version": "1.0.0",
+	"version": "0.0.0",
 	"manifest_version": 2,
 	"description": "Colorize issue and PR links to see their status (open, closed, merged)",
 	"author": "Federico Brigante",
