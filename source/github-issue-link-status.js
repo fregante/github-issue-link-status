@@ -50,11 +50,8 @@ function buildGQL(links) {
 	}
 
 	return query(
-		join(
-			repoIssueMap,
-			([repo, issues]) =>
-				esc(repo) +
-				`: repository(
+		join(repoIssueMap, ([repo, issues]) =>
+			esc(repo) + `: repository(
 				owner: "${repo.split('/')[0]}",
 				name: "${repo.split('/')[1]}"
 			) {${join(issues, ([id]) => `
