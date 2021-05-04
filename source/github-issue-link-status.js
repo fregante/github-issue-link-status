@@ -168,6 +168,7 @@ async function init() {
 	if (token) {
 		onAjaxedPages(() => onNewComments(apply));
 		onPreviewTab(apply);
+		onNewComments(() => onPreviewTab(apply));
 	} else {
 		console.error('GitHub Issue Link Status: you will need to set a token in the options for this extension to work.');
 	}
