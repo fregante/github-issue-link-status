@@ -153,10 +153,22 @@ function onNewComments(cb) {
 	}
 }
 
+function onPreviewTab(cb) {
+	cb();
+	const newCommenstIssue = document.querySelectorAll('#issuecomment-new, .timeline-new-comment');
+	if (newCommenstIssue.length > 0) {
+		const previewButtons = document.querySelectorAll('button.preview-tab:not(.selected)');
+		for (const element of previewButtons) {
+			element.addEventListener('click', () => setTimeout(cb, 1000));
+		}
+	}
+}
+
 async function init() {
 	({token} = await options.getAll());
 	if (token) {
 		onAjaxedPages(() => onNewComments(apply));
+		onPreviewTab(apply);
 	} else {
 		console.error('GitHub Issue Link Status: you will need to set a token in the options for this extension to work.');
 	}
