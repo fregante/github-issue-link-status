@@ -154,7 +154,6 @@ function onNewComments(cb) {
 }
 
 function onPreviewTab(cb) {
-	cb();
 	const newCommenstIssue = document.querySelectorAll('#issuecomment-new, .timeline-new-comment');
 	if (newCommenstIssue.length > 0) {
 		const previewButtons = document.querySelectorAll('button.preview-tab:not(.selected)');
