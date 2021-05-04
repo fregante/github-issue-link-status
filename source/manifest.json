@@ -11,7 +11,7 @@
 	"applications": {
 		"gecko": {
 			"id": "issue-link-status@bfred.it",
-			"strict_min_version": "52.0"
+			"strict_min_version": "53.0"
 		}
 	},
 	"background": {

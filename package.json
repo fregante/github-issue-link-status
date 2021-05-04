@@ -8,7 +8,7 @@
 	},
 	"browserslist": [
 		"last 1 Chrome version",
-		"Firefox 52"
+		"Firefox 53"
 	],
 	"xo": {
 		"envs": [
