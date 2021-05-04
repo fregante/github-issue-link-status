@@ -154,8 +154,8 @@ function onNewComments(cb) {
 }
 
 function onPreviewTab(cb) {
-	const newCommenstIssue = document.querySelectorAll('#issuecomment-new, .timeline-new-comment');
-	if (newCommenstIssue.length > 0) {
+	const newIssuePRComments = document.querySelectorAll('#issuecomment-new, .timeline-new-comment'); // The former selector is for new Issue/PR pages, the latter is for comments to existing Issue/PR pages
+	if (newIssuePRComments.length > 0) {
 		const previewButtons = document.querySelectorAll('button.preview-tab:not(.selected)');
 		for (const element of previewButtons) {
 			element.addEventListener('click', () => setTimeout(cb, 1000));
