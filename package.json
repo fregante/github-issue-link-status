@@ -24,14 +24,14 @@
 	"dependencies": {
 		"webext-base-css": "^1.3.1",
 		"webext-domain-permission-toggle": "^2.1.0",
-		"webext-dynamic-content-scripts": "^7.1.1",
+		"webext-dynamic-content-scripts": "^7.1.2",
 		"webext-options-sync-per-domain": "^2.0.2"
 	},
 	"devDependencies": {
 		"@parcel/config-webextension": "^2.0.0-nightly.2260",
 		"bundlewatch": "^0.3.2",
 		"parcel": "^2.0.0-nightly.636",
-		"xo": "^0.38.2"
+		"xo": "^0.40.2"
 	},
 	"bundlewatch": {
 		"files": [
