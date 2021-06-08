@@ -13,11 +13,6 @@ const stateColorMap = {
 	merged: ['text-purple', 'color-purple-5']
 };
 
-const stateDependentIcons = [
-	'closedissue',
-	'mergedpullrequest'
-];
-
 function anySelector(selector) {
 	const prefix = document.head.style.MozOrient === '' ? 'moz' : 'webkit';
 	return selector.replace(/:any\(/g, `:-${prefix}-any(`);
@@ -125,11 +120,10 @@ async function apply() {
 			const state = item.state.toLowerCase();
 
 			link.classList.add(...stateColorMap[state]);
-			if (item.isDraft) {
-				link.querySelector('svg').classList.add('text-gray', 'color-text-secondary');
-			}
 
-			if (stateDependentIcons.includes(state + type)) {
+			if (item.isDraft && state === 'open') {
+				link.querySelector('svg').outerHTML = icons['draft' + type];
+			} else {
 				link.querySelector('svg').outerHTML = icons[state + type];
 			}
 		} catch {/* Probably a redirect */}
