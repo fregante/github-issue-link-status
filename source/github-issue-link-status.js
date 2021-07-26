@@ -1,5 +1,6 @@
 import options from './options-storage.js';
 import * as icons from './icons.js';
+import 'bundlewatch'; // Testing
 
 let token;
 const __DEV__ = false;
