@@ -3,14 +3,14 @@ import * as icons from './icons.js';
 
 let token;
 const __DEV__ = false;
-const endpoint = location.hostname === 'github.com' ?
-	'https://api.github.com/graphql' :
-	`${location.origin}/api/graphql`;
+const endpoint = location.hostname === 'github.com'
+	? 'https://api.github.com/graphql'
+	: `${location.origin}/api/graphql`;
 const issueUrlRegex = /^[/]([^/]+[/][^/]+)[/](issues|pull)[/](\d+)([/]|$)/;
 const stateColorMap = {
 	open: ['text-green', 'color-text-success'],
 	closed: ['text-red', 'color-text-danger'],
-	merged: ['text-purple', 'color-purple-5']
+	merged: ['text-purple', 'color-purple-5'],
 };
 
 function anySelector(selector) {
@@ -60,7 +60,7 @@ function buildGQL(links) {
 					}
 				}
 			`)}}
-		`)
+		`),
 	);
 }
 
@@ -102,9 +102,9 @@ async function apply() {
 	const response = await fetch(endpoint, {
 		method: 'POST',
 		headers: {
-			Authorization: `bearer ${token}`
+			Authorization: `bearer ${token}`,
 		},
-		body: JSON.stringify({query})
+		body: JSON.stringify({query}),
 	});
 	if (response.status === 401) {
 		console.error('GitHub Issue Link Status: The token was not accepted, it’s likely expired');
