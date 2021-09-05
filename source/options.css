@@ -1,4 +1,4 @@
-@import 'webext-base-css';
+@import '~/node_modules/webext-base-css';
 
 :root {
 	--github-red: #cb2431;
