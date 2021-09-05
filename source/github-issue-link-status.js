@@ -1,3 +1,5 @@
+import delegate from 'delegate-it';
+
 import options from './options-storage.js';
 import * as icons from './icons.js';
 
@@ -147,22 +149,19 @@ function onNewComments(cb) {
 	}
 }
 
-function onPreviewTab(cb) {
-	const newIssuePRComments = document.querySelectorAll('#issuecomment-new, .timeline-new-comment'); // The former selector is for new Issue/PR pages, the latter is for comments to existing Issue/PR pages
-	if (newIssuePRComments.length > 0) {
-		const previewButtons = document.querySelectorAll('button.preview-tab:not(.selected)');
-		for (const element of previewButtons) {
-			element.addEventListener('click', () => setTimeout(cb, 1000));
-		}
-	}
+function onPreviewTab(cb, clickedTarget) {
+	new MutationObserver(setTimeout(cb, 500)).observe(clickedTarget, {attributes: true});
 }
 
 async function init() {
 	({token} = await options.getAll());
 	if (token) {
-		onAjaxedPages(() => onNewComments(apply));
-		onPreviewTab(apply);
-		onNewComments(() => onPreviewTab(apply));
+		onAjaxedPages(() => {
+			onNewComments(apply);
+			delegate('#issuecomment-new, .timeline-new-comment, .timeline-comment', 'button.preview-tab:not(.selected)', 'click', event => {
+				onPreviewTab(apply, event.delegateTarget);
+			});
+		});
 	} else {
 		console.error('GitHub Issue Link Status: you will need to set a token in the options for this extension to work.');
 	}
