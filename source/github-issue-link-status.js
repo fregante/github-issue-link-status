@@ -146,11 +146,18 @@ function onNewComments(cb) {
 
 		// When you edit your own comment
 		commentList.addEventListener('submit', () => setTimeout(cb, 1000)); // Close enough
+
+		// When you click Preview in the editor
+		commentList.addEventListener('click', event => {
+			if (event.target.classList.contains('preview-tab')) {
+				setTimeout(cb, 1000);
+			}
+		}); // Close enough
 	}
 }
 
-function onPreviewTab(cb, clickedTarget) {
-	new MutationObserver(setTimeout(cb, 500)).observe(clickedTarget, {attributes: true});
+function onPreviewTab(cb) {
+	setTimeout(cb, 1000);
 }
 
 async function init() {
@@ -158,8 +165,8 @@ async function init() {
 	if (token) {
 		onAjaxedPages(() => {
 			onNewComments(apply);
-			delegate('#issuecomment-new, .timeline-new-comment, .timeline-comment', 'button.preview-tab:not(.selected)', 'click', event => {
-				onPreviewTab(apply, event.delegateTarget);
+			delegate('#issuecomment-new, .timeline-new-comment, .timeline-comment', 'button.preview-tab:not(.selected)', 'click', () => {
+				onPreviewTab(apply);
 			});
 		});
 	} else {
