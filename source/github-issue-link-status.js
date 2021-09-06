@@ -150,9 +150,9 @@ function onNewComments(cb) {
 		// When you click Preview in the editor
 		commentList.addEventListener('click', event => {
 			if (event.target.classList.contains('preview-tab')) {
-				setTimeout(cb, 1000);
+				setTimeout(cb, 1000); // Close enough
 			}
-		}); // Close enough
+		});
 	}
 }
 
