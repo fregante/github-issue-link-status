@@ -11,12 +11,12 @@ const stateColorMap = {
 	pullrequest: {
 		open: ['text-green', 'color-text-success'],
 		closed: ['text-red', 'color-text-danger'],
-		merged: ['text-purple', 'color-purple-5']
+		merged: ['text-purple', 'color-purple-5'],
 	},
 	issue: {
 		open: ['text-green', 'color-text-success'],
 		closed: ['text-purple', 'color-purple-5'],
-	}
+	},
 };
 
 function anySelector(selector) {
