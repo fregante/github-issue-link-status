@@ -9,13 +9,13 @@ const endpoint = location.hostname === 'github.com'
 const issueUrlRegex = /^[/]([^/]+[/][^/]+)[/](issues|pull)[/](\d+)([/]|$)/;
 const stateColorMap = {
 	pullrequest: {
-		open: ['text-green', 'color-text-success'],
-		closed: ['text-red', 'color-text-danger'],
-		merged: ['text-purple', 'color-purple-5'],
+		open: ['text-green', 'color-text-success', 'color-fg-success'],
+		closed: ['text-red', 'color-text-danger', 'color-fg-danger'],
+		merged: ['text-purple', 'color-purple-5', 'color-fg-done'],
 	},
 	issue: {
-		open: ['text-green', 'color-text-success'],
-		closed: ['text-purple', 'color-purple-5'],
+		open: ['text-green', 'color-text-success', 'color-fg-success'],
+		closed: ['text-purple', 'color-purple-5', 'color-fg-done'],
 	},
 };
 
