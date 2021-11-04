@@ -8,9 +8,15 @@ const endpoint = location.hostname === 'github.com'
 	: `${location.origin}/api/graphql`;
 const issueUrlRegex = /^[/]([^/]+[/][^/]+)[/](issues|pull)[/](\d+)([/]|$)/;
 const stateColorMap = {
-	open: ['text-green', 'color-text-success'],
-	closed: ['text-red', 'color-text-danger'],
-	merged: ['text-purple', 'color-purple-5'],
+	pullrequest: {
+		open: ['text-green', 'color-text-success', 'color-fg-success'],
+		closed: ['text-red', 'color-text-danger', 'color-fg-danger'],
+		merged: ['text-purple', 'color-purple-5', 'color-fg-done'],
+	},
+	issue: {
+		open: ['text-green', 'color-text-success', 'color-fg-success'],
+		closed: ['text-purple', 'color-purple-5', 'color-fg-done'],
+	},
 };
 
 function anySelector(selector) {
@@ -119,7 +125,7 @@ async function apply() {
 			const type = item.__typename.toLowerCase();
 			const state = item.state.toLowerCase();
 
-			link.classList.add(...stateColorMap[state]);
+			link.classList.add(...stateColorMap[type][state]);
 
 			if (item.isDraft && state === 'open') {
 				link.querySelector('svg').outerHTML = icons['draft' + type];
