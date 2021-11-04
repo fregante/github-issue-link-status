@@ -23,11 +23,6 @@ function addOcticonClass(svgString) {
 	return svgString?.replace('<svg', '<svg class="octicon"');
 }
 
-function anySelector(selector) {
-	const prefix = document.head.style.MozOrient === '' ? 'moz' : 'webkit';
-	return selector.replace(/:any\(/g, `:-${prefix}-any(`);
-}
-
 function esc(repo) {
 	return '_' + repo.replace(/[./-]/g, '_');
 }
@@ -76,16 +71,16 @@ function buildGQL(links) {
 
 function getNewLinks() {
 	const newLinks = new Set();
-	const links = document.querySelectorAll(anySelector(`
-		:any(
+	const links = document.querySelectorAll(`
+		:is(
 			.js-issue-title,
 			.markdown-body
 		)
-		a[href^="${location.origin}"]:any(
+		a[href^="${location.origin}"]:is(
 			a[href*="/pull/"],
 			a[href*="/issues/"]
 		):not(.ILS)
-	`));
+	`);
 	for (const link of links) {
 		link.classList.add('ILS');
 		let [, repo, type, id] = link.pathname.match(issueUrlRegex) || [];
@@ -131,10 +126,11 @@ async function apply() {
 
 			link.classList.add(...stateColorMap[type][state]);
 
-			if (item.isDraft && state === 'open') {
-				link.querySelector('svg').outerHTML = addOcticonClass(icons['draft' + type]);
+			const iconName = item.isDraft && state === 'open' ? 'draft' + type : state + type;
+			if (iconName in icons) {
+				link.querySelector('svg').outerHTML = addOcticonClass(icons[iconName]);
 			} else {
-				link.querySelector('svg').outerHTML = addOcticonClass(icons[state + type]);
+				console.error('GitHub Issue Link Status: No icon named', iconName, 'found');
 			}
 		} catch {/* Probably a redirect */}
 	}
