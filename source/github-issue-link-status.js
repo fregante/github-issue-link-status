@@ -19,6 +19,10 @@ const stateColorMap = {
 	},
 };
 
+function addOcticonClass(svgString) {
+	return svgString?.replace('<svg', '<svg class="octicon"');
+}
+
 function anySelector(selector) {
 	const prefix = document.head.style.MozOrient === '' ? 'moz' : 'webkit';
 	return selector.replace(/:any\(/g, `:-${prefix}-any(`);
@@ -101,7 +105,7 @@ async function apply() {
 	}
 
 	for (const {link, type} of links) {
-		link.insertAdjacentHTML('beforeEnd', icons['open' + type]);
+		link.insertAdjacentHTML('beforeEnd', addOcticonClass(icons['open' + type]));
 	}
 
 	const query = buildGQL(links);
@@ -128,9 +132,9 @@ async function apply() {
 			link.classList.add(...stateColorMap[type][state]);
 
 			if (item.isDraft && state === 'open') {
-				link.querySelector('svg').outerHTML = icons['draft' + type];
+				link.querySelector('svg').outerHTML = addOcticonClass(icons['draft' + type]);
 			} else {
-				link.querySelector('svg').outerHTML = icons[state + type];
+				link.querySelector('svg').outerHTML = addOcticonClass(icons[state + type]);
 			}
 		} catch {/* Probably a redirect */}
 	}
