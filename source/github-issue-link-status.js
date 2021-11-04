@@ -19,8 +19,18 @@ const stateColorMap = {
 	},
 };
 
-function addOcticonClass(svgString) {
-	return svgString?.replace('<svg', '<svg class="octicon"');
+function getIcon(state, type, isDraft = false) {
+	const iconName = isDraft && state === 'open' ? 'draft' + type : state + type;
+	if (!(iconName in icons)) {
+		console.error('GitHub Issue Link Status: No icon named', iconName, 'found');
+		return '';
+	}
+
+	if (iconName === 'draftpullrequest') {
+		return icons.draftpullrequest.replace('<svg', '<svg class="octicon color-text-tertiary"');
+	}
+
+	return icons[iconName].replace('<svg', '<svg class="octicon"');
 }
 
 function esc(repo) {
@@ -100,7 +110,7 @@ async function apply() {
 	}
 
 	for (const {link, type} of links) {
-		link.insertAdjacentHTML('beforeEnd', addOcticonClass(icons['open' + type]));
+		link.insertAdjacentHTML('beforeEnd', getIcon('open', type));
 	}
 
 	const query = buildGQL(links);
@@ -126,12 +136,7 @@ async function apply() {
 
 			link.classList.add(...stateColorMap[type][state]);
 
-			const iconName = item.isDraft && state === 'open' ? 'draft' + type : state + type;
-			if (iconName in icons) {
-				link.querySelector('svg').outerHTML = addOcticonClass(icons[iconName]);
-			} else {
-				console.error('GitHub Issue Link Status: No icon named', iconName, 'found');
-			}
+			link.querySelector('svg').outerHTML = getIcon(state, type, item.isDraft);
 		} catch {/* Probably a redirect */}
 	}
 }
