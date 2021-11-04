@@ -31,6 +31,7 @@
 	"devDependencies": {
 		"@parcel/config-webextension": "^2.0.0-rc.0",
 		"@parcel/transformer-image": "^2.0.0-rc.0",
+		"@parcel/transformer-inline-string": "^2.0.0-rc.0",
 		"bundlewatch": "^0.3.2",
 		"parcel": "^2.0.0-rc.0",
 		"xo": "^0.44.0"
