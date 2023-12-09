@@ -7,10 +7,6 @@
 		"test": "xo && npm run build",
 		"watch": "parcel watch --no-cache --no-content-hash --no-hmr"
 	},
-	"browserslist": [
-		"Chrome 110",
-		"Firefox 110"
-	],
 	"xo": {
 		"envs": [
 			"browser",
@@ -55,6 +51,9 @@
 		"main": false,
 		"module": false,
 		"default": {
+			"engines": {
+				"browsers": "Chrome 110, Firefox 110"
+			},
 			"source": "./source/manifest.json",
 			"distDir": "./distribution"
 		}
