@@ -1,10 +1,11 @@
 {
 	"private": true,
+	"type": "module",
 	"scripts": {
-		"build": "parcel build source/manifest.json --dist-dir distribution --no-cache --detailed-report 0",
+		"build": "parcel build --no-cache --no-content-hash",
 		"lint": "xo",
 		"test": "xo && npm run build",
-		"watch": "parcel watch source/manifest.json --dist-dir distribution --no-cache --no-hmr"
+		"watch": "parcel watch --no-cache --no-content-hash --no-hmr"
 	},
 	"browserslist": [
 		"Chrome 110",
@@ -37,6 +38,9 @@
 		"parcel": "^2.10.3",
 		"xo": "^0.56.0"
 	},
+	"@parcel/resolver-default": {
+		"packageExports": true
+	},
 	"bundlewatch": {
 		"files": [
 			{
@@ -44,7 +48,20 @@
 			}
 		]
 	},
+	"targets": {
+		"main": false,
+		"module": false,
+		"default": {
+			"source": "./source/manifest.json",
+			"distDir": "./distribution"
+		}
+	},
 	"webExt": {
+		"run": {
+			"startUrl": [
+				"https://github.com/fregante/github-issue-link-status/issues/57"
+			]
+		},
 		"sourceDir": "distribution"
 	}
 }
