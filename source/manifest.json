@@ -5,14 +5,14 @@
 	"description": "Colorize issue and PR links to see their status (open, closed, merged)",
 	"author": "Federico Brigante",
 	"homepage_url": "https://github.com/fregante/github-issue-link-status",
-	"minimum_chrome_version": "88",
+	"minimum_chrome_version": "110",
 	"icons": {
 		"128": "icon.png"
 	},
 	"applications": {
 		"gecko": {
 			"id": "issue-link-status@bfred.it",
-			"strict_min_version": "78.0"
+			"strict_min_version": "110.0"
 		}
 	},
 	"background": {
