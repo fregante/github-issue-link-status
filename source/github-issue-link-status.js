@@ -34,7 +34,7 @@ function getIcon(state, type, isDraft = false) {
 }
 
 function esc(repo) {
-	return '_' + repo.replace(/[./-]/g, '_');
+	return '_' + repo.replaceAll(/[./-]/g, '_');
 }
 
 function query(q) {
@@ -43,7 +43,7 @@ function query(q) {
 		console.log(q);
 	}
 
-	return q.replace(/\s{2,}/g, ''); // Minify
+	return q.replaceAll(/\s{2,}/g, ''); // Minify
 }
 
 function join(iterable, merger) {
