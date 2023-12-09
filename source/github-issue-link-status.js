@@ -143,7 +143,7 @@ async function apply() {
 
 function onAjaxedPages(cb) {
 	cb();
-	document.addEventListener('pjax:end', cb);
+	document.addEventListener('turbo:render', cb);
 }
 
 function onNewComments(cb) {
