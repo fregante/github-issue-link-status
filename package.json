@@ -38,6 +38,9 @@
 		"parcel": "^2.10.3",
 		"xo": "^0.56.0"
 	},
+	"engines": {
+		"node": ">=20"
+	},
 	"@parcel/resolver-default": {
 		"packageExports": true
 	},
