@@ -9,13 +9,13 @@ const endpoint = location.hostname === 'github.com'
 const issueUrlRegex = /^[/]([^/]+[/][^/]+)[/](issues|pull)[/](\d+)([/]|$)/;
 const stateColorMap = {
 	pullrequest: {
-		open: ['text-green', 'color-text-success', 'color-fg-success'],
-		closed: ['text-red', 'color-text-danger', 'color-fg-danger'],
-		merged: ['text-purple', 'color-purple-5', 'color-fg-done'],
+		open: 'color-fg-success',
+		closed: 'color-fg-danger',
+		merged: 'color-fg-done',
 	},
 	issue: {
-		open: ['text-green', 'color-text-success', 'color-fg-success'],
-		closed: ['text-purple', 'color-purple-5', 'color-fg-done'],
+		open: 'color-fg-success',
+		closed: 'color-fg-done',
 	},
 };
 
@@ -27,7 +27,7 @@ function getIcon(state, type, isDraft = false) {
 	}
 
 	if (iconName === 'draftpullrequest') {
-		return icons.draftpullrequest.replace('<svg', '<svg class="octicon color-text-tertiary"');
+		return icons.draftpullrequest.replace('<svg', '<svg class="octicon color-fg-muted"');
 	}
 
 	return icons[iconName].replace('<svg', '<svg class="octicon"');
@@ -134,7 +134,7 @@ async function apply() {
 			const type = item.__typename.toLowerCase();
 			const state = item.state.toLowerCase();
 
-			link.classList.add(...stateColorMap[type][state]);
+			link.classList.add(stateColorMap[type][state]);
 
 			link.querySelector('svg').outerHTML = getIcon(state, type, item.isDraft);
 		} catch {/* Probably a redirect */}
