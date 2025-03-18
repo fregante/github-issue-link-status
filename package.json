@@ -53,7 +53,7 @@
 		"module": false,
 		"default": {
 			"engines": {
-				"browsers": "Chrome 110, Firefox 110"
+				"browsers": "Chrome 130, Firefox 130"
 			},
 			"source": "./source/manifest.json",
 			"distDir": "./distribution"
