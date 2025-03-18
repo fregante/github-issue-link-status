@@ -1,36 +1,36 @@
 {
 	"name": "GitHub Issue Link Status",
 	"version": "0.0.0",
-	"manifest_version": 2,
+	"manifest_version": 3,
 	"description": "Colorize issue and PR links to see their status (open, closed, merged)",
 	"author": "Federico Brigante",
 	"homepage_url": "https://github.com/fregante/github-issue-link-status",
-	"minimum_chrome_version": "110",
+	"minimum_chrome_version": "130",
 	"icons": {
 		"128": "icon.png"
 	},
-	"applications": {
+	"browser_specific_settings": {
 		"gecko": {
 			"id": "issue-link-status@bfred.it",
-			"strict_min_version": "110.0"
+			"strict_min_version": "130.0"
 		}
 	},
 	"background": {
 		"scripts": ["background.js"],
-		"persistent": false
+		"service_worker": "background.js",
+		"type": "module"
 	},
-	"browser_action": {
+	"action": {
 		"default_icon": "icon.png"
 	},
 	"permissions": [
 		"storage",
 		"contextMenus",
-		"activeTab",
-		"https://api.github.com/*"
+		"activeTab"
 	],
-	"optional_permissions": ["*://*/*"],
+	"host_permissions": ["https://api.github.com/*"],
+	"optional_host_permissions": ["*://*/*"],
 	"options_ui": {
-		"chrome_style": true,
 		"page": "options.html"
 	},
 	"content_scripts": [
